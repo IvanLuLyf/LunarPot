@@ -1,0 +1,7 @@
+{
+  "name": "SpringBoot on Heroku",
+  "description": "SpringBoot which can easily be deployed to Heroku.",
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
