@@ -9,6 +9,6 @@ public class IndexController {
     @RequestMapping(value = {"/", "/index"})
     @ResponseBody
     public String index() {
-        return "OneLive 20210301";
+        return "OneLive 20210302";
     }
 }
