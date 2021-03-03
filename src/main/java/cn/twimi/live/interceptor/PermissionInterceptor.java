@@ -58,7 +58,8 @@ public class PermissionInterceptor implements HandlerInterceptor {
                 String[] permissionList = permission.value().split(",");
                 boolean flag = false;
                 for (String p : permissionList) {
-                    if (("login".equals(p))
+                    if (("host".equals(p) && user.getRoleId() == 2)
+                            || ("login".equals(p))
                     ) {
                         flag = true;
                         break;
