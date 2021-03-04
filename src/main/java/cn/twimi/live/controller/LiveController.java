@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping("/api/channel")
 public class LiveController {
@@ -33,6 +35,7 @@ public class LiveController {
         Message message = new Message();
         message.setId(System.currentTimeMillis());
         message.setContent(msg);
+        message.setTimestamp(new Date());
         this.operations.convertAndSend("/topic/channel/" + room, message);
         return message;
     }
