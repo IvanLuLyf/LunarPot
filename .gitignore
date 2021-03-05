@@ -34,4 +34,4 @@ build/
 
 ### Project ###
 logs
-db.sqlite3
+bunny.sqlite3
