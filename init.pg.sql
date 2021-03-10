@@ -20,3 +20,14 @@ comment on table tp_user is '用户表';
 
 insert into tp_user (id, username, password, email, phone, role_id, state)
 values (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@twimi.cn', '13312345678', 1, 1);
+
+create table tp_channel
+(
+    id          serial
+        constraint tp_channel_pk
+            primary key,
+    title       varchar(50) not null,
+    create_time timestamp,
+    user_id     integer,
+    state       integer
+);
