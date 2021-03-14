@@ -1,6 +1,7 @@
 package cn.twimi.live.controller;
 
 import cn.twimi.live.util.IPFSUtil;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @CrossOrigin
 @RequestMapping("/file")
 public class FileController {
-    @RequestMapping(value = "/p/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
+    @RequestMapping(value = "/p/{id}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     @ResponseBody
+    @Cacheable("pictures")
     public byte[] picture(@PathVariable("id") String id) {
         return IPFSUtil.fetchFile(id);
     }
