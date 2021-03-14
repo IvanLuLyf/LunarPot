@@ -18,8 +18,12 @@ public class FileController {
     @RequestMapping(value = "/p/{id}", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     @ResponseBody
     @Cacheable(value = "pictures", key = "#id")
-    public ResponseEntity<byte[]> picture(@PathVariable("id") String id) {
-        return ResponseEntity.ok().lastModified(System.currentTimeMillis()).body(IPFSUtil.fetchFile(id));
+    public ResponseEntity<byte[]> picture(@PathVariable("id") String id, WebRequest request) {
+        long lastModified = System.currentTimeMillis() / 3600000 * 3600000;
+        if (request.checkNotModified(lastModified)) {
+            return null;
+        }
+        return ResponseEntity.ok().lastModified(lastModified).body(IPFSUtil.fetchFile(id));
     }
 
     @RequestMapping(value = "/t/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
