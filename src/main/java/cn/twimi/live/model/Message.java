@@ -9,5 +9,6 @@ public class Message {
     private long id;
     private int type;
     private String content;
+    private String extra;
     private Date timestamp;
 }
