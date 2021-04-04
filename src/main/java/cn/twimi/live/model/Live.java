@@ -1,11 +1,15 @@
 package cn.twimi.live.model;
 
+import cn.twimi.live.util.IdUtil;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
 public class Live {
+    @JsonIgnore
     private long id;
     private String title;
     private long userId;
@@ -25,5 +29,10 @@ public class Live {
         this.title = title;
         this.createTime = new Date();
         this.state = STATE_STARTED;
+    }
+
+    @JsonGetter
+    public String getLiveId() {
+        return IdUtil.encode(this.id);
     }
 }
