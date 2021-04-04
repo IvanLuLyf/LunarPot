@@ -35,6 +35,12 @@ public class LiveServiceImpl implements LiveService {
     }
 
     @Override
+    public List<Message> listHistory(String liveId, int page, int limit) {
+        long realId = IdUtil.decode(liveId);
+        return messageDao.getMessagesByLiveIdWithPage(realId, (page - 1) * limit, limit);
+    }
+
+    @Override
     public ApiResponse<Live> create(Live live) {
         List<Live> lives = liveDao.getLivesByUserIdAndState(live.getUserId(), Live.STATE_STARTED);
         if (lives.size() > 0) {

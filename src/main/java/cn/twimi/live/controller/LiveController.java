@@ -69,4 +69,17 @@ public class LiveController {
         User user = (User) request.getAttribute("curUser");
         return liveService.push(user.getId(), liveId, content, file);
     }
+
+    @PostMapping("/list/{liveId}")
+    public ApiResponse<PageData<Message>> apiListHistory(
+            @PathVariable String liveId,
+            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "10") int size) {
+        List<Message> lives = liveService.listHistory(liveId, page, size);
+        PageData<Message> messagePageData = PageData.<Message>builder()
+                .list(lives).page(page)
+                .total(lives.size())
+                .build();
+        return ApiResponse.<PageData<Message>>builder().status(0).msg("ok").data(messagePageData).build();
+    }
 }
