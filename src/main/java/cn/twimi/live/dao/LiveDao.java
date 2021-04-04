@@ -18,8 +18,8 @@ public interface LiveDao {
     @Select("select count(1) from tp_live")
     int count();
 
-    @Select("select * from tp_live where user_id=#{userId} order by id")
-    List<Live> getLivesByUserId(long userId);
+    @Select("select * from tp_live where user_id=#{userId} order by id limit #{size} offset #{st}")
+    List<Live> getLivesByUserIdWithPage(long userId, @Param("st") int start, @Param("size") int size);
 
     @Select("select count(1)>0 as auth from tp_live where user_id=#{userId} and id=#{liveId} and state=#{state}")
     boolean checkLiveAvailable(long userId, long liveId, int state);
