@@ -5,26 +5,19 @@ import cn.twimi.live.service.FileService;
 import cn.twimi.live.util.MD5;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-
-import javax.servlet.ServletContext;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Objects;
 
 @Service
 @Profile("local")
 public class LocalFileServiceImpl implements FileService {
-
-    private final ServletContext context;
-
-    public LocalFileServiceImpl(ServletContext context) {
-        this.context = context;
-    }
-
-    private File getDir(String subDir) {
-        String basePath = context.getRealPath("upload") + File.separator + subDir;
+    private File getDir(String subDir) throws FileNotFoundException {
+        String basePath = ResourceUtils.getURL("classpath:").getPath() + File.separator + subDir;
         File dir = new File(basePath);
         if (!dir.exists()) {
             dir.mkdirs();

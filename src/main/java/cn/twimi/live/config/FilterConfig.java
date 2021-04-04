@@ -1,24 +1,14 @@
 package cn.twimi.live.config;
 
+import cn.twimi.live.interceptor.PermissionInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import cn.twimi.live.interceptor.PermissionInterceptor;
-
-import javax.servlet.ServletContext;
-import java.io.File;
 
 @Configuration
 public class FilterConfig implements WebMvcConfigurer {
-
-    private final ServletContext context;
-
-    public FilterConfig(ServletContext context) {
-        this.context = context;
-    }
-
     @Bean
     public PermissionInterceptor permissionInterceptor() {
         return new PermissionInterceptor();
@@ -34,6 +24,6 @@ public class FilterConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/upload/**")
-                .addResourceLocations("file:" + context.getRealPath("upload").replace(File.separatorChar, '/') + '/');
+                .addResourceLocations("classpath:/upload/");
     }
 }
