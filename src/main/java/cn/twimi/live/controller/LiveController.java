@@ -30,19 +30,32 @@ public class LiveController {
     @ResponseBody
     public ApiResponse<Live> createLive(
             HttpServletRequest request,
-            @RequestParam(value = "title") String title
+            @RequestParam("title") String title
     ) {
         User user = (User) request.getAttribute("curUser");
         return liveService.create(new Live(user.getId(), title));
     }
 
     @Permission("host")
+    @PostMapping("/stop")
+    @ResponseBody
+    public ApiResponse<Message> stopLive(
+            HttpServletRequest request,
+            @RequestParam("liveId") String liveId
+    ) {
+        User user = (User) request.getAttribute("curUser");
+        return liveService.stop(user.getId(), liveId);
+    }
+
+    @Permission("host")
     @PostMapping("/push/{liveId}")
     @ResponseBody
     public ApiResponse<Message> push(
+            HttpServletRequest request,
             @PathVariable String liveId,
             @RequestParam(value = "content", required = false, defaultValue = "") String content,
             @RequestParam(value = "file", required = false) MultipartFile file) {
-        return liveService.push(liveId, content, file);
+        User user = (User) request.getAttribute("curUser");
+        return liveService.push(user.getId(), liveId, content, file);
     }
 }

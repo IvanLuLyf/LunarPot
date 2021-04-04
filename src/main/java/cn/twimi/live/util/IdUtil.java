@@ -34,6 +34,7 @@ public class IdUtil {
     }
 
     public static long decode(String x) {
+        if (!x.startsWith("LV")) return 0;
         long r = 0;
         for (int i = 0; i < 6; i++) {
             r += (long) number2Word.get(getIndex(x, s[i])) * (long) Math.pow(58, i);

@@ -10,9 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 public interface LiveService {
     ApiResponse<Live> create(Live live);
 
-    ApiResponse<Message> push(String liveId, String content);
+    ApiResponse<Message> push(long userId, String liveId, String content);
 
-    ApiResponse<Message> push(String liveId, String content, MultipartFile file);
+    ApiResponse<Message> push(long userId, String liveId, String content, MultipartFile file);
 
-    ApiResponse<Message> close(String liveId);
+    ApiResponse<Message> stop(long userId, String liveId);
 }

@@ -43,13 +43,18 @@ public class LiveServiceImpl implements LiveService {
     }
 
     @Override
-    public ApiResponse<Message> push(String liveId, String content) {
-        return this.push(liveId, content, null);
+    public ApiResponse<Message> push(long userId, String liveId, String content) {
+        return this.push(userId, liveId, content, null);
     }
 
     @Override
-    public ApiResponse<Message> push(String liveId, String content, MultipartFile file) {
-        Message message = new Message(IdUtil.decode(liveId), content);
+    public ApiResponse<Message> push(long userId, String liveId, String content, MultipartFile file) {
+        long realId = IdUtil.decode(liveId);
+        boolean checkHost = realId > 0 && liveDao.checkLiveAvailable(userId, realId, Live.STATE_STARTED);
+        if (!checkHost) {
+            return ApiResponse.<Message>builder().status(2).msg("直播不可用").build();
+        }
+        Message message = new Message(realId, content);
         if (file != null) {
             message.setType(2);
             FileInfo fileInfo = fileService.upload(file, "image");
@@ -64,7 +69,20 @@ public class LiveServiceImpl implements LiveService {
     }
 
     @Override
-    public ApiResponse<Message> close(String liveId) {
-        return null;
+    public ApiResponse<Message> stop(long userId, String liveId) {
+        long realId = IdUtil.decode(liveId);
+        boolean checkHost = realId > 0 && liveDao.checkLiveAvailable(userId, realId, Live.STATE_STARTED);
+        if (!checkHost) {
+            return ApiResponse.<Message>builder().status(2).msg("直播不可用").build();
+        }
+        int row = liveDao.updateState(realId, Live.STATE_ENDED);
+        if (row <= 0) {
+            return ApiResponse.<Message>builder().status(-6).msg("数据库出错").build();
+        }
+        Message message = new Message();
+        message.setType(Message.TYPE_SYSTEM);
+        message.setContent("stop");
+        this.operations.convertAndSend("/topic/channel/" + liveId, message);
+        return ApiResponse.<Message>builder().data(message).msg("ok").status(0).build();
     }
 }
