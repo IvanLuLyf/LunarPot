@@ -2,23 +2,22 @@ package cn.twimi.live.controller;
 
 import cn.twimi.live.annotation.Permission;
 import cn.twimi.live.common.ApiResponse;
+import cn.twimi.live.common.PageData;
 import cn.twimi.live.model.Live;
 import cn.twimi.live.model.Message;
 import cn.twimi.live.model.User;
 import cn.twimi.live.service.LiveService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api/live")
+@CrossOrigin
 public class LiveController {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
     private final LiveService liveService;
 
     public LiveController(LiveService liveService) {
@@ -27,7 +26,6 @@ public class LiveController {
 
     @Permission("host")
     @PostMapping("/create")
-    @ResponseBody
     public ApiResponse<Live> createLive(
             HttpServletRequest request,
             @RequestParam("title") String title
@@ -38,7 +36,6 @@ public class LiveController {
 
     @Permission("host")
     @PostMapping("/stop")
-    @ResponseBody
     public ApiResponse<Message> stopLive(
             HttpServletRequest request,
             @RequestParam("liveId") String liveId
@@ -48,8 +45,22 @@ public class LiveController {
     }
 
     @Permission("host")
+    @PostMapping("/list")
+    public ApiResponse<PageData<Live>> apiList(
+            HttpServletRequest request,
+            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "10") int size) {
+        User user = (User) request.getAttribute("curUser");
+        List<Live> lives = liveService.listByUserId(user.getId(), page, size);
+        PageData<Live> livePageData = PageData.<Live>builder()
+                .list(lives).page(page)
+                .total(lives.size())
+                .build();
+        return ApiResponse.<PageData<Live>>builder().status(0).msg("ok").data(livePageData).build();
+    }
+
+    @Permission("host")
     @PostMapping("/push/{liveId}")
-    @ResponseBody
     public ApiResponse<Message> push(
             HttpServletRequest request,
             @PathVariable String liveId,
