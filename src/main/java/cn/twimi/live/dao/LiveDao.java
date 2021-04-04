@@ -18,17 +18,17 @@ public interface LiveDao {
     @Select("select count(1) from tp_live")
     int count();
 
-    @Select("select from tp_live where user_id=#{userId} order by id")
+    @Select("select * from tp_live where user_id=#{userId} order by id")
     List<Live> getLivesByUserId(long userId);
 
-    @Select("select from tp_live where user_id=#{userId} and state=#{state}")
-    List<Live> getLivesByUserId(long userId, int state);
+    @Select("select * from tp_live where user_id=#{userId} and state=#{state}")
+    List<Live> getLivesByUserIdAndState(long userId, int state);
 
     @Select("select * from tp_live where title like #{search}")
     List<Live> getLivesBySearch(String search);
 
     @Select("select * from tp_live where title like #{search} and state=#{state}")
-    List<Live> getLivesBySearch(String search, int state);
+    List<Live> getLivesBySearchAndState(String search, int state);
 
     @Insert("insert into tp_live(user_id,title,create_time,state) values (#{userId},#{title},#{createTime},#{state})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
