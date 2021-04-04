@@ -8,6 +8,7 @@ import cn.twimi.live.model.Message;
 import cn.twimi.live.model.User;
 import cn.twimi.live.service.FileService;
 import cn.twimi.live.service.LiveService;
+import cn.twimi.live.util.IdUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
@@ -23,13 +24,9 @@ import java.util.Date;
 public class LiveController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final SimpMessageSendingOperations operations;
-    private final FileService fileService;
     private final LiveService liveService;
 
-    public LiveController(SimpMessageSendingOperations operations, FileService fileService, LiveService liveService) {
-        this.operations = operations;
-        this.fileService = fileService;
+    public LiveController(LiveService liveService) {
         this.liveService = liveService;
     }
 
@@ -45,24 +42,12 @@ public class LiveController {
     }
 
     @Permission("host")
-    @PostMapping("/push/{room}")
+    @PostMapping("/push/{liveId}")
     @ResponseBody
     public ApiResponse<Message> push(
-            @PathVariable String room,
+            @PathVariable String liveId,
             @RequestParam(value = "content", required = false, defaultValue = "") String content,
             @RequestParam(value = "file", required = false) MultipartFile file) {
-        Message message = new Message();
-        message.setId(System.currentTimeMillis());
-        message.setContent(content);
-        message.setTimestamp(new Date());
-        if (file != null) {
-            message.setType(2);
-            FileInfo fileInfo = fileService.upload(file, "image");
-            message.setExtra(fileService.pathToUrl(fileInfo.getPath()));
-        } else {
-            message.setType(1);
-        }
-        this.operations.convertAndSend("/topic/channel/" + room, message);
-        return ApiResponse.<Message>builder().data(message).msg("ok").status(0).build();
+        return liveService.push(liveId, content, file);
     }
 }
