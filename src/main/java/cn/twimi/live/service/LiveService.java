@@ -6,8 +6,12 @@ import cn.twimi.live.model.Message;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Service
 public interface LiveService {
+    List<Live> listByUserId(long userId, int page, int limit);
+
     ApiResponse<Live> create(Live live);
 
     ApiResponse<Message> push(long userId, String liveId, String content);

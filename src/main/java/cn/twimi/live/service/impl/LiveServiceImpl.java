@@ -30,6 +30,11 @@ public class LiveServiceImpl implements LiveService {
     }
 
     @Override
+    public List<Live> listByUserId(long userId, int page, int limit) {
+        return liveDao.getLivesByUserIdWithPage(userId, (page - 1) * limit, limit);
+    }
+
+    @Override
     public ApiResponse<Live> create(Live live) {
         List<Live> lives = liveDao.getLivesByUserIdAndState(live.getUserId(), Live.STATE_STARTED);
         if (lives.size() > 0) {
