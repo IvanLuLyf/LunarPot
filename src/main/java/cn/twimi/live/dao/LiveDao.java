@@ -21,6 +21,12 @@ public interface LiveDao {
     @Select("select * from tp_live where user_id=#{userId} order by id")
     List<Live> getLivesByUserId(long userId);
 
+    @Select("select count(1)>0 as auth from tp_live where user_id=#{userId} and id=#{liveId} and state=#{state}")
+    boolean checkLiveAvailable(long userId, long liveId, int state);
+
+    @Update("update tp_live set state=#{state} where id=#{id}")
+    int updateState(long id, int state);
+
     @Select("select * from tp_live where user_id=#{userId} and state=#{state}")
     List<Live> getLivesByUserIdAndState(long userId, int state);
 
