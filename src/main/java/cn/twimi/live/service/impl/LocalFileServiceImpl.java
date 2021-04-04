@@ -17,7 +17,7 @@ import java.util.Objects;
 @Profile("local")
 public class LocalFileServiceImpl implements FileService {
     private File getDir(String subDir) throws FileNotFoundException {
-        String basePath = ResourceUtils.getURL("classpath:").getPath() + File.separator + subDir;
+        String basePath = ResourceUtils.getURL("classpath:").getPath() + "upload" + File.separator + subDir;
         File dir = new File(basePath);
         if (!dir.exists()) {
             dir.mkdirs();
