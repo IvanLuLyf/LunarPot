@@ -35,6 +35,7 @@ create table tp_message
     id        integer
         constraint tp_message_pk
             primary key autoincrement,
+    live_id   integer,
     type      integer,
     content   text,
     extra     text,

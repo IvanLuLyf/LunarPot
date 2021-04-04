@@ -37,6 +37,7 @@ create table tp_message
     id        serial
         constraint tp_message_pk
             primary key,
+    live_id   integer,
     type      integer,
     content   text,
     extra     text,
