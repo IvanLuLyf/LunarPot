@@ -18,15 +18,14 @@ public class LiveServiceImpl implements LiveService {
 
     @Override
     public ApiResponse<Live> create(Live live) {
-        List<Live> lives = liveDao.getLivesByUserId(live.getUserId(), Live.STATE_STARTED);
+        List<Live> lives = liveDao.getLivesByUserIdAndState(live.getUserId(), Live.STATE_STARTED);
         if (lives.size() > 0) {
             return ApiResponse.<Live>builder().status(1).msg("已有正在进行的直播").build();
         }
-        long liveId = liveDao.create(live);
-        if (liveId <= 0) {
+        long row = liveDao.create(live);
+        if (row <= 0) {
             return ApiResponse.<Live>builder().status(-6).msg("数据库出错").build();
         }
-        live.setId(liveId);
         return ApiResponse.<Live>builder().status(0).msg("ok").data(live).build();
     }
 }
