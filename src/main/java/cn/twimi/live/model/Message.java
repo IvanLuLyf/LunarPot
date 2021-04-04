@@ -24,6 +24,7 @@ public class Message {
     }
 
     public Message(long liveId, String content) {
+        this.type = TYPE_TEXT;
         this.liveId = liveId;
         this.content = content;
         this.timestamp = new Date();
