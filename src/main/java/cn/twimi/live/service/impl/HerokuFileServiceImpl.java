@@ -30,6 +30,6 @@ public class HerokuFileServiceImpl implements FileService {
 
     @Override
     public String pathToUrl(String path) {
-        return "http://onelive.herokuapp.com/file/p/" + path;
+        return "https://onelive.herokuapp.com/file/p/" + path;
     }
 }
