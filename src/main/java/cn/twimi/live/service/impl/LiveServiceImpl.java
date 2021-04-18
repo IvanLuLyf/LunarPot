@@ -54,6 +54,33 @@ public class LiveServiceImpl implements LiveService {
     }
 
     @Override
+    public ApiResponse<Live> get(String liveId) {
+        long realId = IdUtil.decode(liveId);
+        Live live = liveDao.getLiveById(realId);
+        return ApiResponse.<Live>builder().status(0).msg("ok").data(live).build();
+    }
+
+    @Override
+    public ApiResponse<Message> updateExtra(long userId, String liveId, String extra) {
+        long realId = IdUtil.decode(liveId);
+        boolean checkHost = realId > 0 && liveDao.checkLiveAvailable(userId, realId, Live.STATE_STARTED);
+        if (!checkHost) {
+            return ApiResponse.<Message>builder().status(2).msg("直播不可用").build();
+        }
+        Message message = new Message();
+        message.setLiveId(realId);
+        message.setContent("update");
+        message.setType(Message.TYPE_SYSTEM);
+        message.setExtra(extra);
+        int row = liveDao.updateExtra(realId, extra);
+        if (row <= 0) {
+            return ApiResponse.<Message>builder().status(-6).msg("数据库出错").build();
+        }
+        this.operations.convertAndSend("/topic/channel/" + liveId, message);
+        return ApiResponse.<Message>builder().data(message).msg("ok").status(0).build();
+    }
+
+    @Override
     public ApiResponse<Message> push(long userId, String liveId, String content) {
         return this.push(userId, liveId, content, null);
     }

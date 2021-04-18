@@ -27,6 +27,9 @@ public interface LiveDao {
     @Update("update tp_live set state=#{state} where id=#{id}")
     int updateState(long id, int state);
 
+    @Update("update tp_live set extra=#{extra} where id=#{id}")
+    int updateExtra(long id, String extra);
+
     @Select("select * from tp_live where user_id=#{userId} and state=#{state}")
     List<Live> getLivesByUserIdAndState(long userId, int state);
 

@@ -16,6 +16,10 @@ public interface LiveService {
 
     ApiResponse<Live> create(Live live);
 
+    ApiResponse<Live> get(String liveId);
+
+    ApiResponse<Message> updateExtra(long userId, String liveId, String extra);
+
     ApiResponse<Message> push(long userId, String liveId, String content);
 
     ApiResponse<Message> push(long userId, String liveId, String content, MultipartFile file);
