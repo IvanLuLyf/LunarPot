@@ -36,4 +36,7 @@ public interface UserDao {
 
     @Update("update tp_user set state=#{state} where id=#{id}")
     int updateState(long id, int state);
+
+    @Update("update tp_user set name=#{name} where id=#{id}")
+    int updateName(long id, String name);
 }

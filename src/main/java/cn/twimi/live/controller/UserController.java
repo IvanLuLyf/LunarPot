@@ -1,13 +1,13 @@
 package cn.twimi.live.controller;
 
-import org.springframework.web.bind.annotation.*;
 import cn.twimi.live.annotation.Permission;
 import cn.twimi.live.common.ApiResponse;
 import cn.twimi.live.common.PageData;
 import cn.twimi.live.model.User;
 import cn.twimi.live.service.UserService;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/user")
@@ -25,7 +25,7 @@ public class UserController {
         return userService.login(username, password);
     }
 
-    @Permission("admin")
+    @Permission(User.ADMIN)
     @PostMapping("/create")
     public ApiResponse<User> apiCreate(
             @RequestParam String username,
@@ -40,7 +40,7 @@ public class UserController {
         return userService.register(user);
     }
 
-    @Permission("admin")
+    @Permission(User.ADMIN)
     @PostMapping("/list")
     public ApiResponse<PageData<User>> apiList(
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
@@ -52,7 +52,7 @@ public class UserController {
         return ApiResponse.<PageData<User>>builder().status(0).msg("ok").data(userPageData).build();
     }
 
-    @Permission("admin")
+    @Permission(User.ADMIN)
     @PostMapping("/updateState")
     public ApiResponse<Boolean> apiUpdateState(
             @RequestParam("id") long id,
@@ -60,7 +60,17 @@ public class UserController {
         return userService.updateState(id, state);
     }
 
-    @Permission("login")
+    @Permission(User.LOGIN)
+    @PostMapping("/updateName")
+    public ApiResponse<Boolean> apiUpdateName(
+            HttpServletRequest request,
+            @RequestParam("name") String name
+    ) {
+        User user = (User) request.getAttribute("curUser");
+        return userService.updateName(user.getId(), name);
+    }
+
+    @Permission(User.LOGIN)
     @PostMapping("/userInfo")
     public ApiResponse<User> apiUserInfo(
             @RequestParam("id") long id

@@ -67,6 +67,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public ApiResponse<Boolean> updateName(long id, String name) {
+        int res = userDao.updateName(id, name);
+        if (res > 0) {
+            return ApiResponse.<Boolean>builder().status(0).msg("ok").data(true).build();
+        } else {
+            return ApiResponse.<Boolean>builder().status(-6).msg("数据库出错").data(false).build();
+        }
+    }
+
+    @Override
     public ApiResponse<User> login(String username, String password) {
         User user = userDao.getUserByUsername(username);
         if (user == null) {

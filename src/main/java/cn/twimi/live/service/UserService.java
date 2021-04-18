@@ -20,6 +20,8 @@ public interface UserService {
 
     ApiResponse<Boolean> updateState(long id, int state);
 
+    ApiResponse<Boolean> updateName(long id, String name);
+
     ApiResponse<User> login(String username, String password);
 
     ApiResponse<User> register(User user);
