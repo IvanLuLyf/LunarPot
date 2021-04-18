@@ -1,12 +1,12 @@
 package cn.twimi.live.interceptor;
 
+import cn.twimi.live.annotation.Permission;
+import cn.twimi.live.model.User;
+import cn.twimi.live.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.thymeleaf.util.StringUtils;
-import cn.twimi.live.annotation.Permission;
-import cn.twimi.live.model.User;
-import cn.twimi.live.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +26,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
             if (permission == null) {
                 permission = handlerMethod.getMethod().getDeclaringClass().getAnnotation(Permission.class);
             }
-            if (permission != null && !StringUtils.isEmptyOrWhitespace(permission.value())) {
+            if (permission != null) {
                 String token = request.getParameter("token");
                 if (StringUtils.isEmpty(token)) {
                     sendError(2003, "非法的Token", response);
@@ -51,16 +51,14 @@ public class PermissionInterceptor implements HandlerInterceptor {
                     request.setAttribute("curUser", user);
                     return true;
                 }
-                if (permission.value().equals("admin") && user.getRoleId() != 1) {
-                    sendError(2002, "需要管理员权限", response);
-                    return false;
-                }
-                String[] permissionList = permission.value().split(",");
+                int[] permissions = permission.value();
                 boolean flag = false;
-                for (String p : permissionList) {
-                    if (("host".equals(p) && user.getRoleId() == 2)
-                            || ("login".equals(p))
-                    ) {
+                for (int p : permissions) {
+                    if (p == User.ADMIN && user.getRoleId() != User.ADMIN) {
+                        sendError(2002, "需要管理员权限", response);
+                        return false;
+                    }
+                    if (p == user.getRoleId() || p == User.LOGIN) {
                         flag = true;
                         break;
                     }
