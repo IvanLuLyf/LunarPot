@@ -24,7 +24,7 @@ public class LiveController {
         this.liveService = liveService;
     }
 
-    @Permission(User.HOST)
+    @Permission({User.HOST, User.GROUP})
     @PostMapping("/create")
     public ApiResponse<Live> createLive(
             HttpServletRequest request,
@@ -34,7 +34,7 @@ public class LiveController {
         return liveService.create(new Live(user.getId(), title));
     }
 
-    @Permission(User.HOST)
+    @Permission({User.HOST, User.GROUP})
     @PostMapping("/update")
     public ApiResponse<Message> updateLive(
             HttpServletRequest request,
@@ -52,7 +52,7 @@ public class LiveController {
         return liveService.get(liveId);
     }
 
-    @Permission(User.HOST)
+    @Permission({User.HOST, User.GROUP})
     @PostMapping("/stop")
     public ApiResponse<Message> stopLive(
             HttpServletRequest request,
@@ -62,7 +62,7 @@ public class LiveController {
         return liveService.stop(user.getId(), liveId);
     }
 
-    @Permission(User.HOST)
+    @Permission({User.HOST, User.GROUP})
     @PostMapping("/list")
     public ApiResponse<PageData<Live>> apiList(
             HttpServletRequest request,
@@ -77,7 +77,7 @@ public class LiveController {
         return ApiResponse.<PageData<Live>>builder().status(0).msg("ok").data(livePageData).build();
     }
 
-    @Permission(User.HOST)
+    @Permission({User.HOST, User.GROUP})
     @PostMapping("/push/{liveId}")
     public ApiResponse<Message> push(
             HttpServletRequest request,
