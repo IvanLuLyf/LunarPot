@@ -7,15 +7,20 @@ import java.util.Date;
 
 @Data
 public class User {
+    public static final int LOGIN = 0;
+    public static final int ADMIN = 1;
+    public static final int HOST = 2;
+    public static final int GROUP = 3;
+
     private long id;
     private String username;
     @JsonIgnore
     private String password;
     private String name;
     private String email;
+    private String avatar;
     private String phone;
     private int roleId;
-    private int role;
     private Date createTime;
     private Date updateTime;
     private int state;
