@@ -1,11 +1,14 @@
 package cn.twimi.live.service.impl;
 
+import cn.twimi.live.model.FileInfo;
+import cn.twimi.live.service.FileService;
 import org.springframework.stereotype.Service;
 import cn.twimi.live.common.ApiResponse;
 import cn.twimi.live.dao.UserDao;
 import cn.twimi.live.model.User;
 import cn.twimi.live.service.UserService;
 import cn.twimi.live.util.MD5;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
@@ -13,9 +16,11 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
+    private FileService fileService;
 
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, FileService fileService) {
         this.userDao = userDao;
+        this.fileService = fileService;
     }
 
     private String generateToken(String username) {
@@ -73,6 +78,18 @@ public class UserServiceImpl implements UserService {
             return ApiResponse.<Boolean>builder().status(0).msg("ok").data(true).build();
         } else {
             return ApiResponse.<Boolean>builder().status(-6).msg("数据库出错").data(false).build();
+        }
+    }
+
+    @Override
+    public ApiResponse<String> updateAvatar(long id, MultipartFile file) {
+        FileInfo fileInfo = fileService.upload(file, "avatar");
+        String path = fileService.pathToUrl(fileInfo.getPath());
+        int res = userDao.updateAvatar(id, path);
+        if (res > 0) {
+            return ApiResponse.<String>builder().status(0).msg("ok").data(path).build();
+        } else {
+            return ApiResponse.<String>builder().status(-6).msg("数据库出错").build();
         }
     }
 

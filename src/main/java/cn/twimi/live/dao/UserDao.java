@@ -39,4 +39,7 @@ public interface UserDao {
 
     @Update("update tp_user set name=#{name} where id=#{id}")
     int updateName(long id, String name);
+
+    @Update("update tp_user set avatar=#{avatar} where id=#{id}")
+    int updateAvatar(long id, String avatar);
 }

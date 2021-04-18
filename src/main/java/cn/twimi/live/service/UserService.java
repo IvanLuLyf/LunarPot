@@ -3,6 +3,7 @@ package cn.twimi.live.service;
 import org.springframework.stereotype.Service;
 import cn.twimi.live.common.ApiResponse;
 import cn.twimi.live.model.User;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,6 +22,8 @@ public interface UserService {
     ApiResponse<Boolean> updateState(long id, int state);
 
     ApiResponse<Boolean> updateName(long id, String name);
+
+    ApiResponse<String> updateAvatar(long id, MultipartFile file);
 
     ApiResponse<User> login(String username, String password);
 

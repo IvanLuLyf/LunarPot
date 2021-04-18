@@ -6,6 +6,7 @@ import cn.twimi.live.common.PageData;
 import cn.twimi.live.model.User;
 import cn.twimi.live.service.UserService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -68,6 +69,16 @@ public class UserController {
     ) {
         User user = (User) request.getAttribute("curUser");
         return userService.updateName(user.getId(), name);
+    }
+
+    @Permission(User.LOGIN)
+    @PostMapping("/updateAvatar")
+    public ApiResponse<String> apiUpdateAvatar(
+            HttpServletRequest request,
+            @RequestParam("file") MultipartFile file
+    ) {
+        User user = (User) request.getAttribute("curUser");
+        return userService.updateAvatar(user.getId(), file);
     }
 
     @Permission(User.LOGIN)
