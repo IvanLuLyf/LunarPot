@@ -7,6 +7,7 @@ create table tp_user
     password    varchar(50) not null,
     name        varchar(20),
     email       varchar(50),
+    avatar      text,
     phone       varchar(20),
     role_id     integer,
     create_time datetime,
@@ -25,6 +26,7 @@ create table tp_live
         constraint tp_live_pk
             primary key autoincrement,
     title       varchar(50) not null,
+    extra       text,
     create_time datetime,
     user_id     integer,
     state       integer
@@ -40,4 +42,16 @@ create table tp_message
     content   text,
     extra     text,
     timestamp datetime
+);
+
+create table tp_article
+(
+    id          integer
+        constraint tp_article_pk
+            primary key autoincrement,
+    title       text,
+    content     text,
+    create_time datetime,
+    user_id     integer,
+    state       integer
 );
