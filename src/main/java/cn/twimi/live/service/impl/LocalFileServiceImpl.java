@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 @Service
-@Profile("local")
+@Profile({"local", "mysql"})
 public class LocalFileServiceImpl implements FileService {
     private File getDir(String subDir) throws FileNotFoundException {
         String basePath = ResourceUtils.getURL("classpath:").getPath() + "upload" + File.separator + subDir;
