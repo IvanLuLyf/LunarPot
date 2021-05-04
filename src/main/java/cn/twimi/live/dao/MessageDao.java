@@ -30,5 +30,5 @@ public interface MessageDao {
             " order by id",
             "<if test=\"page &gt; 0 and size &gt; 0\"> limit #{size} offset #{start_pos} </if>",
             "</script>"})
-    List<Message> listBy(Map<String, String> param, int page, int size);
+    List<Message> listBy(Map<String, Object> param, int page, int size);
 }

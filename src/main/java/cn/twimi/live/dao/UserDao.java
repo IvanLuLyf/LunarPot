@@ -42,7 +42,7 @@ public interface UserDao {
             " order by id",
             "<if test=\"page &gt; 0 and size &gt; 0\"> limit #{size} offset #{start_pos} </if>",
             "</script>"})
-    List<User> listBy(Map<String, String> param, int page, int size);
+    List<User> listBy(Map<String, Object> param, int page, int size);
 
     @Insert({"insert into ",
             TABLE_NAME,

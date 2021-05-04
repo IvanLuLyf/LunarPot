@@ -37,7 +37,7 @@ public interface ArticleDao {
             " order by id",
             "<if test=\"page &gt; 0 and size &gt; 0\"> limit #{size} offset #{start_pos} </if>",
             "</script>"})
-    List<Article> listBy(Map<String, String> param, int page, int size);
+    List<Article> listBy(Map<String, Object> param, int page, int size);
 
     @Insert({"insert into ",
             TABLE_NAME,

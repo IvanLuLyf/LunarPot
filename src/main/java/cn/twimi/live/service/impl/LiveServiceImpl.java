@@ -32,16 +32,16 @@ public class LiveServiceImpl implements LiveService {
 
     @Override
     public List<Live> listByUserId(long userId, int page, int limit) {
-        return liveDao.listBy(new HashMap<String, String>() {{
-            put("user_id", "" + userId);
+        return liveDao.listBy(new HashMap<String, Object>() {{
+            put("user_id", userId);
         }}, page, limit);
     }
 
     @Override
     public List<Message> listHistory(String liveId, int page, int limit) {
         long realId = IdUtil.decode(liveId);
-        return messageDao.listBy(new HashMap<String, String>() {{
-            put("live_id", "" + realId);
+        return messageDao.listBy(new HashMap<String, Object>() {{
+            put("live_id", realId);
         }}, page, limit);
     }
 

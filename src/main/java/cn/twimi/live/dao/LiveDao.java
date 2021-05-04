@@ -37,7 +37,7 @@ public interface LiveDao {
             " order by id",
             "<if test=\"page &gt; 0 and size &gt; 0\"> limit #{size} offset #{start_pos} </if>",
             "</script>"})
-    List<Live> listBy(Map<String, String> param, int page, int size);
+    List<Live> listBy(Map<String, Object> param, int page, int size);
 
     @Select("select * from " + TABLE_NAME + " where user_id=#{userId} and state=#{state}")
     List<Live> listByUserIdAndState(long userId, int state);
