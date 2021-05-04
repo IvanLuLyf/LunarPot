@@ -11,6 +11,7 @@ import cn.twimi.live.util.MD5;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -29,12 +30,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(long id) {
-        return userDao.getUserById(id);
+        return userDao.getById(id);
     }
 
     @Override
     public User getUserByToken(String token) {
-        User user = userDao.getUserByToken(token);
+        User user = userDao.getByToken(token);
         if (user != null) {
             if ((new Date()).after(user.getExpire())) {
                 return null;
@@ -45,17 +46,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getUsersBySearch(String search) {
-        return userDao.getUsersBySearch("%" + search + "%");
+        return userDao.listBy(new HashMap<String, String>() {{
+            put("keyword", search);
+        }}, 0, 0);
     }
 
     @Override
     public List<User> getUsersByPage(int page, int size) {
-        return userDao.getUsersByPage((page - 1) * size, size);
+        return userDao.listByPage(page, size);
     }
 
     @Override
     public int countUser() {
-        return userDao.countUser();
+        return userDao.count();
     }
 
     @Override
@@ -95,7 +98,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ApiResponse<User> login(String username, String password) {
-        User user = userDao.getUserByUsername(username);
+        User user = userDao.getByUsername(username);
         if (user == null) {
             return ApiResponse.<User>builder().status(1002).msg("用户不存在").build();
         }
@@ -124,11 +127,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ApiResponse<User> register(User user) {
-        User u = userDao.getUserByUsername(user.getUsername());
+        User u = userDao.getByUsername(user.getUsername());
         if (u != null) {
             return ApiResponse.<User>builder().status(1003).msg("用户名已存在").build();
         }
-        u = userDao.getUserByUsername(user.getEmail());
+        u = userDao.getByUsername(user.getEmail());
         if (u != null) {
             return ApiResponse.<User>builder().status(1003).msg("邮箱已存在").build();
         }
