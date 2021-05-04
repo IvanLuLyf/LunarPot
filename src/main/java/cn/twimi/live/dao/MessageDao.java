@@ -25,7 +25,7 @@ public interface MessageDao {
             "select * from ",
             TABLE_NAME,
             "<where>",
-            "<if test=\"param.live_id!=null\"> and live_id=#{live_id} </if>",
+            "<if test=\"param.live_id!=null\"> and live_id=#{param.live_id} </if>",
             "</where>",
             " order by id",
             "<if test=\"page &gt; 0 and size &gt; 0\"> limit #{size} offset #{start_pos} </if>",

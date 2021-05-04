@@ -52,15 +52,15 @@ public interface UserDao {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int create(User user);
 
-    @Update("update " + TABLE_NAME + " set token=#{token},update_time=#{updateTime},expire=#{expire} where id=#{id} limit 1")
+    @Update("update " + TABLE_NAME + " set token=#{token},update_time=#{updateTime},expire=#{expire} where id=#{id}")
     int updateToken(User user);
 
-    @Update("update " + TABLE_NAME + " set state=#{state} where id=#{id} limit 1")
+    @Update("update " + TABLE_NAME + " set state=#{state} where id=#{id}")
     int updateState(long id, int state);
 
-    @Update("update " + TABLE_NAME + " set name=#{name} where id=#{id} limit 1")
+    @Update("update " + TABLE_NAME + " set name=#{name} where id=#{id}")
     int updateName(long id, String name);
 
-    @Update("update " + TABLE_NAME + " set avatar=#{avatar} where id=#{id} limit 1")
+    @Update("update " + TABLE_NAME + " set avatar=#{avatar} where id=#{id}")
     int updateAvatar(long id, String avatar);
 }
