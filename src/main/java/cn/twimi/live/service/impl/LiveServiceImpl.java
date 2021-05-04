@@ -40,7 +40,9 @@ public class LiveServiceImpl implements LiveService {
     @Override
     public List<Message> listHistory(String liveId, int page, int limit) {
         long realId = IdUtil.decode(liveId);
-        return messageDao.getMessagesByLiveIdWithPage(realId, page, limit);
+        return messageDao.listBy(new HashMap<String, String>() {{
+            put("live_id", "" + realId);
+        }}, page, limit);
     }
 
     @Override
