@@ -12,6 +12,7 @@ public class Live {
     @JsonIgnore
     private long id;
     private String title;
+    private String extra;
     private long userId;
     private Date createTime;
     private int state;
