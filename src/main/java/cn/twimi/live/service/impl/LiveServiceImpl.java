@@ -31,6 +31,13 @@ public class LiveServiceImpl implements LiveService {
     }
 
     @Override
+    public List<Live> listByPage(int page, int limit) {
+        return liveDao.listBy(new HashMap<String, Object>() {{
+            put("state", Live.STATE_STARTED);
+        }}, page, limit);
+    }
+
+    @Override
     public List<Live> listByUserId(long userId, int page, int limit) {
         return liveDao.listBy(new HashMap<String, Object>() {{
             put("user_id", userId);

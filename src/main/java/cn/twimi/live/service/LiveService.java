@@ -10,6 +10,8 @@ import java.util.List;
 
 @Service
 public interface LiveService {
+    List<Live> listByPage(int page, int limit);
+
     List<Live> listByUserId(long userId, int page, int limit);
 
     List<Message> listHistory(String liveId, int page, int limit);

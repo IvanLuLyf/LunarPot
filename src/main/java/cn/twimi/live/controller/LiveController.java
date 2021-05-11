@@ -45,6 +45,18 @@ public class LiveController {
         return liveService.updateExtra(user.getId(), liveId, extra);
     }
 
+    @PostMapping("/list")
+    public ApiResponse<PageData<Live>> apiList(
+            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "10") int size) {
+        List<Live> lives = liveService.listByPage(page, size);
+        PageData<Live> livePageData = PageData.<Live>builder()
+                .list(lives).page(page)
+                .total(lives.size())
+                .build();
+        return ApiResponse.<PageData<Live>>builder().status(0).msg("ok").data(livePageData).build();
+    }
+
     @PostMapping("/get/{liveId}")
     public ApiResponse<Live> getLive(
             @PathVariable String liveId
@@ -63,7 +75,7 @@ public class LiveController {
     }
 
     @Permission({User.HOST, User.GROUP})
-    @PostMapping("/list")
+    @PostMapping("/mine")
     public ApiResponse<PageData<Live>> apiList(
             HttpServletRequest request,
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,

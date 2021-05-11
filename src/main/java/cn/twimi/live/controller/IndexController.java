@@ -2,6 +2,7 @@ package cn.twimi.live.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class IndexController {
@@ -13,5 +14,11 @@ public class IndexController {
     @RequestMapping({"/admin"})
     public String admin() {
         return "admin.html";
+    }
+
+    @RequestMapping({"/version"})
+    @ResponseBody
+    public String version() {
+        return "OneLive 20210512";
     }
 }
