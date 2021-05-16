@@ -6,6 +6,7 @@ import cn.twimi.live.model.Article;
 import cn.twimi.live.service.ArticleService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -34,5 +35,12 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> getArticlesByPage(int page, int limit) {
         return articleDao.listByPage(page, limit);
+    }
+
+    @Override
+    public List<Article> getArticlesBySearch(String keyword, int page, int limit) {
+        return articleDao.listBy(new HashMap<String, Object>() {{
+            put("keyword", keyword);
+        }}, page, limit);
     }
 }

@@ -49,4 +49,17 @@ public class ArticleController {
                 .build();
         return ApiResponse.<PageData<Article>>builder().status(0).msg("ok").data(articlePageData).build();
     }
+
+    @RequestMapping("/search")
+    public ApiResponse<PageData<Article>> apiSearch(
+            @RequestParam(name = "keyword") String keyword,
+            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "10") int size) {
+        List<Article> articles = articleService.getArticlesBySearch(keyword, page, size);
+        PageData<Article> articlePageData = PageData.<Article>builder()
+                .list(articles).page(page)
+                .total(articles.size())
+                .build();
+        return ApiResponse.<PageData<Article>>builder().status(0).msg("ok").data(articlePageData).build();
+    }
 }

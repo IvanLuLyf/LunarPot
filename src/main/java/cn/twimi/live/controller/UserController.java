@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
 @CrossOrigin
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -92,5 +93,19 @@ public class UserController {
         } else {
             return ApiResponse.<User>builder().msg("用户不存在").status(1002).build();
         }
+    }
+
+    @Permission(User.LOGIN)
+    @PostMapping("/search")
+    public ApiResponse<PageData<User>> apiSearch(
+            @RequestParam(name = "keyword") String keyword,
+            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "10") int size) {
+        List<User> users = userService.getUsersBySearch(keyword, page, size);
+        PageData<User> userPageData = PageData.<User>builder()
+                .list(users).page(page)
+                .total(users.size())
+                .build();
+        return ApiResponse.<PageData<User>>builder().status(0).msg("ok").data(userPageData).build();
     }
 }

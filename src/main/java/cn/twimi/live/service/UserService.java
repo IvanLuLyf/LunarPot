@@ -13,7 +13,7 @@ public interface UserService {
 
     User getUserByToken(String token);
 
-    List<User> getUsersBySearch(String search);
+    List<User> getUsersBySearch(String search,int page, int size);
 
     List<User> getUsersByPage(int page, int size);
 

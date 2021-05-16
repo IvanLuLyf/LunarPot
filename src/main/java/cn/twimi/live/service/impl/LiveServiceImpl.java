@@ -45,6 +45,13 @@ public class LiveServiceImpl implements LiveService {
     }
 
     @Override
+    public List<Live> listBySearch(String keyword, int page, int limit) {
+        return liveDao.listBy(new HashMap<String, Object>() {{
+            put("keyword", keyword);
+        }}, page, limit);
+    }
+
+    @Override
     public List<Message> listHistory(String liveId, int page, int limit) {
         long realId = IdUtil.decode(liveId);
         return messageDao.listBy(new HashMap<String, Object>() {{

@@ -89,6 +89,19 @@ public class LiveController {
         return ApiResponse.<PageData<Live>>builder().status(0).msg("ok").data(livePageData).build();
     }
 
+    @PostMapping("/search")
+    public ApiResponse<PageData<Live>> apiSearch(
+            @RequestParam(name = "keyword") String keyword,
+            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "10") int size) {
+        List<Live> lives = liveService.listBySearch(keyword, page, size);
+        PageData<Live> livePageData = PageData.<Live>builder()
+                .list(lives).page(page)
+                .total(lives.size())
+                .build();
+        return ApiResponse.<PageData<Live>>builder().status(0).msg("ok").data(livePageData).build();
+    }
+
     @Permission({User.HOST, User.GROUP})
     @PostMapping("/push/{liveId}")
     public ApiResponse<Message> push(

@@ -45,10 +45,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUsersBySearch(String search) {
+    public List<User> getUsersBySearch(String search, int page, int size) {
         return userDao.listBy(new HashMap<String, Object>() {{
             put("keyword", search);
-        }}, 0, 0);
+        }}, page, size);
     }
 
     @Override

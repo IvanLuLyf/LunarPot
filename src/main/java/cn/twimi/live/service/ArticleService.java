@@ -13,4 +13,6 @@ public interface ArticleService {
     ApiResponse<Article> get(long id);
 
     List<Article> getArticlesByPage(int page, int limit);
+
+    List<Article> getArticlesBySearch(String keyword, int page, int limit);
 }

@@ -14,6 +14,8 @@ public interface LiveService {
 
     List<Live> listByUserId(long userId, int page, int limit);
 
+    List<Live> listBySearch(String keyword, int page, int limit);
+
     List<Message> listHistory(String liveId, int page, int limit);
 
     ApiResponse<Live> create(Live live);
