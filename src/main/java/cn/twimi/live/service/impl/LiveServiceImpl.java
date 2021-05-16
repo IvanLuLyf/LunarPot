@@ -48,6 +48,7 @@ public class LiveServiceImpl implements LiveService {
     public List<Live> listBySearch(String keyword, int page, int limit) {
         return liveDao.listBy(new HashMap<String, Object>() {{
             put("keyword", keyword);
+            put("orderBy", "id desc");
         }}, page, limit);
     }
 

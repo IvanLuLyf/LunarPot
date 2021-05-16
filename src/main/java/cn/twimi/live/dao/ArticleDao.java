@@ -20,7 +20,7 @@ public interface ArticleDao {
 
     @Select({"<script>",
             "<bind name=\"start_pos\" value=\"(page-1)*size\" />",
-            "select * from ", TABLE_NAME, " order by id",
+            "select * from ", TABLE_NAME, " order by id desc",
             "<if test=\"page &gt; 0 and size &gt; 0\"> limit #{size} offset #{start_pos} </if>",
             "</script>"})
     List<Article> listByPage(int page, int size);
@@ -34,7 +34,7 @@ public interface ArticleDao {
             "<if test=\"param.state!=null\"> and state=#{param.state} </if>",
             "<if test=\"param.user_id!=null\"> and user_id=#{param.user_id} </if>",
             "</where>",
-            " order by id",
+            "<if test=\"param.orderBy!=null\"> order by #{param.orderBy} </if>",
             "<if test=\"page &gt; 0 and size &gt; 0\"> limit #{size} offset #{start_pos} </if>",
             "</script>"})
     List<Article> listBy(Map<String, Object> param, int page, int size);

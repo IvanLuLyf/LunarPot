@@ -41,6 +41,7 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getArticlesBySearch(String keyword, int page, int limit) {
         return articleDao.listBy(new HashMap<String, Object>() {{
             put("keyword", keyword);
+            put("orderBy", "id desc");
         }}, page, limit);
     }
 }

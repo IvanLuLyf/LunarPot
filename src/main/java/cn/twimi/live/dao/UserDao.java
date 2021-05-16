@@ -39,7 +39,7 @@ public interface UserDao {
             "<if test=\"param.keyword!=null\"> <bind name=\"search\" value=\"'%'+param.keyword+'%'\" /> name like #{search} or username like #{search} </if>",
             "<if test=\"param.state!=null\"> and state=#{param.state} </if>",
             "</where>",
-            " order by id",
+            "<if test=\"param.orderBy!=null\"> order by #{param.orderBy} </if>",
             "<if test=\"page &gt; 0 and size &gt; 0\"> limit #{size} offset #{start_pos} </if>",
             "</script>"})
     List<User> listBy(Map<String, Object> param, int page, int size);

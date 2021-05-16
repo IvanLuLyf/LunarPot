@@ -95,7 +95,6 @@ public class UserController {
         }
     }
 
-    @Permission(User.LOGIN)
     @PostMapping("/search")
     public ApiResponse<PageData<User>> apiSearch(
             @RequestParam(name = "keyword") String keyword,
