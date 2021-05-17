@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsersBySearch(String search, int page, int size) {
         return userDao.listBy(new HashMap<String, Object>() {{
             put("keyword", search);
+            put("state", 1);
         }}, page, size);
     }
 
