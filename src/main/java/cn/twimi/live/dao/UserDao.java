@@ -33,7 +33,7 @@ public interface UserDao {
 
     @Select({"<script>",
             "<bind name=\"start_pos\" value=\"(page-1)*size\" />",
-            "select id,name,username,avatar,roleId from ",
+            "select id,name,username,avatar,role_id from ",
             TABLE_NAME,
             "<where>",
             "<if test=\"param.keyword!=null\"> <bind name=\"search\" value=\"'%'+param.keyword+'%'\" /> name like #{search} or username like #{search} </if>",
