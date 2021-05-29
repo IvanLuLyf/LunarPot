@@ -46,15 +46,4 @@ public class FileController {
     public byte[] any(@PathVariable("id") String id) {
         return IPFSUtil.fetchFile(id);
     }
-
-    @Permission(User.LOGIN)
-    @RequestMapping("/upload")
-    @ResponseBody
-    public ApiResponse<String> upload(@RequestParam("file") MultipartFile file, FileService fileService) {
-        FileInfo fileInfo = fileService.upload(file, "attach");
-        return ApiResponse.<String>builder()
-                .status(0)
-                .msg("ok")
-                .data(fileService.pathToUrl(fileInfo.getPath())).build();
-    }
 }
