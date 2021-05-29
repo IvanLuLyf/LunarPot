@@ -19,6 +19,6 @@ public class IndexController {
     @RequestMapping({"/version"})
     @ResponseBody
     public String version() {
-        return "OneLive 20210517";
+        return "OneLive 20210529";
     }
 }
