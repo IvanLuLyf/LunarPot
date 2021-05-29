@@ -1,15 +1,18 @@
 package cn.twimi.live.controller;
 
+import cn.twimi.live.annotation.Permission;
+import cn.twimi.live.common.ApiResponse;
+import cn.twimi.live.model.FileInfo;
+import cn.twimi.live.model.User;
+import cn.twimi.live.service.FileService;
 import cn.twimi.live.util.IPFSUtil;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @CrossOrigin
@@ -42,5 +45,16 @@ public class FileController {
     @ResponseBody
     public byte[] any(@PathVariable("id") String id) {
         return IPFSUtil.fetchFile(id);
+    }
+
+    @Permission(User.LOGIN)
+    @RequestMapping("/upload")
+    @ResponseBody
+    public ApiResponse<String> upload(@RequestParam("file") MultipartFile file, FileService fileService) {
+        FileInfo fileInfo = fileService.upload(file, "attach");
+        return ApiResponse.<String>builder()
+                .status(0)
+                .msg("ok")
+                .data(fileService.pathToUrl(fileInfo.getPath())).build();
     }
 }
