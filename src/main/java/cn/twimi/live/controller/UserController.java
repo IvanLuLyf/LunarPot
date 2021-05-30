@@ -27,6 +27,20 @@ public class UserController {
         return userService.login(username, password);
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResponse<User> apiRegister(
+            @RequestParam String username,
+            @RequestParam String password,
+            @RequestParam String name,
+            @RequestParam(required = false, defaultValue = "") String email,
+            @RequestParam(required = false, defaultValue = "") String phone
+    ) {
+        User user = new User(username, password, name, email, phone);
+        user.setRoleId(0);
+        return userService.register(user);
+    }
+
     @Permission(User.ADMIN)
     @PostMapping("/create")
     public ApiResponse<User> apiCreate(
