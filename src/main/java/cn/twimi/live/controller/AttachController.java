@@ -1,9 +1,7 @@
 package cn.twimi.live.controller;
 
-import cn.twimi.live.annotation.Permission;
 import cn.twimi.live.common.ApiResponse;
 import cn.twimi.live.model.FileInfo;
-import cn.twimi.live.model.User;
 import cn.twimi.live.service.FileService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +20,6 @@ public class AttachController {
         this.fileService = fileService;
     }
 
-    @Permission(User.LOGIN)
     @RequestMapping("/upload")
     public ApiResponse<String> upload(@RequestParam("file") MultipartFile file) {
         FileInfo fileInfo = fileService.upload(file, "attach");
