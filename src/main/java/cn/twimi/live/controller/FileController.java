@@ -1,10 +1,5 @@
 package cn.twimi.live.controller;
 
-import cn.twimi.live.annotation.Permission;
-import cn.twimi.live.common.ApiResponse;
-import cn.twimi.live.model.FileInfo;
-import cn.twimi.live.model.User;
-import cn.twimi.live.service.FileService;
 import cn.twimi.live.util.IPFSUtil;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
@@ -12,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @CrossOrigin

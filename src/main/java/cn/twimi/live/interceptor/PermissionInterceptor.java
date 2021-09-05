@@ -1,6 +1,6 @@
 package cn.twimi.live.interceptor;
 
-import cn.twimi.live.annotation.Permission;
+import cn.twimi.common.annotation.Permission;
 import cn.twimi.live.model.User;
 import cn.twimi.live.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

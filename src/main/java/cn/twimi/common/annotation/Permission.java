@@ -1,4 +1,4 @@
-package cn.twimi.live.annotation;
+package cn.twimi.common.annotation;
 
 import java.lang.annotation.*;
 

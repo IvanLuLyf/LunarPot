@@ -1,6 +1,6 @@
 package cn.twimi.live.controller;
 
-import cn.twimi.live.annotation.Permission;
+import cn.twimi.common.annotation.Permission;
 import cn.twimi.live.common.ApiResponse;
 import cn.twimi.live.common.PageData;
 import cn.twimi.live.model.Live;
