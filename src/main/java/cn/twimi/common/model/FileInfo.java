@@ -1,4 +1,4 @@
-package cn.twimi.live.model;
+package cn.twimi.common.model;
 
 import lombok.Builder;
 import lombok.Data;

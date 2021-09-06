@@ -1,6 +1,6 @@
 package cn.twimi.live.model;
 
-import cn.twimi.live.util.IdUtil;
+import cn.twimi.util.IdUtil;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

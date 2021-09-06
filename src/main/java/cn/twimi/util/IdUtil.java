@@ -1,4 +1,4 @@
-package cn.twimi.live.util;
+package cn.twimi.util;
 
 import java.util.HashMap;
 

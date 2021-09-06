@@ -1,8 +1,8 @@
-package cn.twimi.live.interceptor;
+package cn.twimi.interceptor;
 
 import cn.twimi.common.annotation.Permission;
-import cn.twimi.live.model.User;
-import cn.twimi.live.service.UserService;
+import cn.twimi.common.model.User;
+import cn.twimi.common.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;

@@ -1,8 +1,8 @@
-package cn.twimi.live.service.impl;
+package cn.twimi.common.service.impl;
 
-import cn.twimi.live.model.FileInfo;
-import cn.twimi.live.service.FileService;
-import cn.twimi.live.util.MD5;
+import cn.twimi.common.model.FileInfo;
+import cn.twimi.common.service.FileService;
+import cn.twimi.util.MD5;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;

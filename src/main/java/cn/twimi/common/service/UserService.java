@@ -1,8 +1,8 @@
-package cn.twimi.live.service;
+package cn.twimi.common.service;
 
 import org.springframework.stereotype.Service;
-import cn.twimi.live.common.ApiResponse;
-import cn.twimi.live.model.User;
+import cn.twimi.util.ApiResponse;
+import cn.twimi.common.model.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

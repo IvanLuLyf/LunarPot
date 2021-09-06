@@ -1,13 +1,13 @@
-package cn.twimi.live.service.impl;
+package cn.twimi.common.service.impl;
 
-import cn.twimi.live.model.FileInfo;
-import cn.twimi.live.service.FileService;
+import cn.twimi.common.model.FileInfo;
+import cn.twimi.common.service.FileService;
 import org.springframework.stereotype.Service;
-import cn.twimi.live.common.ApiResponse;
-import cn.twimi.live.dao.UserDao;
-import cn.twimi.live.model.User;
-import cn.twimi.live.service.UserService;
-import cn.twimi.live.util.MD5;
+import cn.twimi.util.ApiResponse;
+import cn.twimi.common.dao.UserDao;
+import cn.twimi.common.model.User;
+import cn.twimi.common.service.UserService;
+import cn.twimi.util.MD5;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;

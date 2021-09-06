@@ -1,6 +1,6 @@
 package cn.twimi.live.service;
 
-import cn.twimi.live.common.ApiResponse;
+import cn.twimi.util.ApiResponse;
 import cn.twimi.live.model.Article;
 import org.springframework.stereotype.Service;
 

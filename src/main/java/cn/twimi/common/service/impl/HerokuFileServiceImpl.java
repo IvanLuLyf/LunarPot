@@ -1,8 +1,8 @@
-package cn.twimi.live.service.impl;
+package cn.twimi.common.service.impl;
 
-import cn.twimi.live.model.FileInfo;
-import cn.twimi.live.service.FileService;
-import cn.twimi.live.util.IPFSUtil;
+import cn.twimi.common.model.FileInfo;
+import cn.twimi.common.service.FileService;
+import cn.twimi.util.IPFSUtil;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

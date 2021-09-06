@@ -1,8 +1,8 @@
 package cn.twimi.live.controller;
 
-import cn.twimi.live.common.ApiResponse;
-import cn.twimi.live.model.FileInfo;
-import cn.twimi.live.service.FileService;
+import cn.twimi.util.ApiResponse;
+import cn.twimi.common.model.FileInfo;
+import cn.twimi.common.service.FileService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

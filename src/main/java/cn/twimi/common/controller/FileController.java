@@ -1,6 +1,6 @@
-package cn.twimi.live.controller;
+package cn.twimi.common.controller;
 
-import cn.twimi.live.util.IPFSUtil;
+import cn.twimi.util.IPFSUtil;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

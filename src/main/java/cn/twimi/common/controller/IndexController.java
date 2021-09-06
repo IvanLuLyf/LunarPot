@@ -1,4 +1,4 @@
-package cn.twimi.live.controller;
+package cn.twimi.common.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

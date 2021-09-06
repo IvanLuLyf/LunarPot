@@ -1,6 +1,6 @@
-package cn.twimi.live.dao;
+package cn.twimi.common.dao;
 
-import cn.twimi.live.model.User;
+import cn.twimi.common.model.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 

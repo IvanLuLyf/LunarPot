@@ -1,10 +1,10 @@
-package cn.twimi.live.controller;
+package cn.twimi.common.controller;
 
 import cn.twimi.common.annotation.Permission;
-import cn.twimi.live.common.ApiResponse;
-import cn.twimi.live.common.PageData;
-import cn.twimi.live.model.User;
-import cn.twimi.live.service.UserService;
+import cn.twimi.util.ApiResponse;
+import cn.twimi.util.PageData;
+import cn.twimi.common.model.User;
+import cn.twimi.common.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

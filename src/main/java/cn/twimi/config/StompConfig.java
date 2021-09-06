@@ -1,4 +1,4 @@
-package cn.twimi.live.config;
+package cn.twimi.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

@@ -1,4 +1,4 @@
-package cn.twimi.live.util;
+package cn.twimi.util;
 
 import io.ipfs.api.IPFS;
 import io.ipfs.api.MerkleNode;

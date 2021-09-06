@@ -1,14 +1,14 @@
 package cn.twimi.live.service.impl;
 
-import cn.twimi.live.common.ApiResponse;
+import cn.twimi.util.ApiResponse;
 import cn.twimi.live.dao.LiveDao;
 import cn.twimi.live.dao.MessageDao;
-import cn.twimi.live.model.FileInfo;
+import cn.twimi.common.model.FileInfo;
 import cn.twimi.live.model.Live;
 import cn.twimi.live.model.Message;
-import cn.twimi.live.service.FileService;
+import cn.twimi.common.service.FileService;
 import cn.twimi.live.service.LiveService;
-import cn.twimi.live.util.IdUtil;
+import cn.twimi.util.IdUtil;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

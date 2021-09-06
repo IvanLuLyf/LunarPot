@@ -1,6 +1,6 @@
 package cn.twimi.live.service.impl;
 
-import cn.twimi.live.common.ApiResponse;
+import cn.twimi.util.ApiResponse;
 import cn.twimi.live.dao.ArticleDao;
 import cn.twimi.live.model.Article;
 import cn.twimi.live.service.ArticleService;
