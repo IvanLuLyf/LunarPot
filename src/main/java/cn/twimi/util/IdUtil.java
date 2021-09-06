@@ -3,11 +3,11 @@ package cn.twimi.util;
 import java.util.HashMap;
 
 public class IdUtil {
-    private static String table = "fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF";
-    private static int[] s = {11, 10, 3, 8, 4, 6};
-    private static int xor = 177451812;
-    private static long add = 8728348608L;
-    private static HashMap<String, Integer> number2Word;
+    private static final String table = "fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF";
+    private static final int[] s = {11, 10, 3, 8, 4, 6};
+    private static final int xor = 177451812;
+    private static final long add = 8728348608L;
+    private static final HashMap<String, Integer> number2Word;
 
     static {
         number2Word = new HashMap<>();
