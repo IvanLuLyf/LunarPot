@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "lunar-pot.hostname",
+      "type": "java.lang.String",
+      "description": "LunarPot hostname."
+    }
+  ]
+}

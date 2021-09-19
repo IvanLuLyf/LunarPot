@@ -3,6 +3,7 @@ package cn.twimi.common.service.impl;
 import cn.twimi.common.model.FileInfo;
 import cn.twimi.common.service.FileService;
 import cn.twimi.util.MD5;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
@@ -16,6 +17,9 @@ import java.util.Objects;
 @Service
 @Profile({"local", "mysql"})
 public class LocalFileServiceImpl implements FileService {
+    @Value("${lunar-pot.hostname:}")
+    private String hostname;
+
     private File getDir(String subDir) throws FileNotFoundException {
         String basePath = ResourceUtils.getURL("classpath:").getPath() + "upload" + File.separator + subDir;
         File dir = new File(basePath);
@@ -47,6 +51,6 @@ public class LocalFileServiceImpl implements FileService {
 
     @Override
     public String pathToUrl(String path) {
-        return "http://localhost:8080/upload/" + path;
+        return hostname + "/upload/" + path;
     }
 }
