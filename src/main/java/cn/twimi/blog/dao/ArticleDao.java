@@ -1,6 +1,6 @@
-package cn.twimi.live.dao;
+package cn.twimi.blog.dao;
 
-import cn.twimi.live.model.Article;
+import cn.twimi.blog.model.Article;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 

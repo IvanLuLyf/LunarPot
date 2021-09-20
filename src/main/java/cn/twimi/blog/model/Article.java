@@ -1,4 +1,4 @@
-package cn.twimi.live.model;
+package cn.twimi.blog.model;
 
 import lombok.Data;
 

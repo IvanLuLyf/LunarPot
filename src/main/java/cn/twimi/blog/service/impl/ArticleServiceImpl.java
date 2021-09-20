@@ -1,9 +1,9 @@
-package cn.twimi.live.service.impl;
+package cn.twimi.blog.service.impl;
 
 import cn.twimi.util.ApiResponse;
-import cn.twimi.live.dao.ArticleDao;
-import cn.twimi.live.model.Article;
-import cn.twimi.live.service.ArticleService;
+import cn.twimi.blog.dao.ArticleDao;
+import cn.twimi.blog.model.Article;
+import cn.twimi.blog.service.ArticleService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

@@ -1,7 +1,7 @@
-package cn.twimi.live.service;
+package cn.twimi.blog.service;
 
 import cn.twimi.util.ApiResponse;
-import cn.twimi.live.model.Article;
+import cn.twimi.blog.model.Article;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

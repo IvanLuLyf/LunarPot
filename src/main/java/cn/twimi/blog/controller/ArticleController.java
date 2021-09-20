@@ -1,11 +1,11 @@
-package cn.twimi.live.controller;
+package cn.twimi.blog.controller;
 
 import cn.twimi.common.annotation.Permission;
 import cn.twimi.util.ApiResponse;
 import cn.twimi.util.PageData;
-import cn.twimi.live.model.Article;
+import cn.twimi.blog.model.Article;
 import cn.twimi.common.model.User;
-import cn.twimi.live.service.ArticleService;
+import cn.twimi.blog.service.ArticleService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
