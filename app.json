@@ -1,6 +1,6 @@
 {
-  "name": "SpringBoot on Heroku",
-  "description": "SpringBoot which can easily be deployed to Heroku.",
+  "name": "LunarPot",
+  "description": "Backend for Small Apps.",
   "addons": [
     "heroku-postgresql"
   ]
