@@ -4,21 +4,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 public class IndexController {
     @RequestMapping({"/", "/index"})
-    public String index() {
-        return "index.html";
-    }
-
-    @RequestMapping({"/admin"})
-    public String admin() {
-        return "admin.html";
-    }
-
-    @RequestMapping({"/version"})
     @ResponseBody
-    public String version() {
-        return "LunarPot 20210920";
+    public Map<String, Object> index() {
+        return new HashMap<String, Object>() {{
+            put("name", "LunarPot");
+            put("version", "20211007");
+        }};
     }
 }
