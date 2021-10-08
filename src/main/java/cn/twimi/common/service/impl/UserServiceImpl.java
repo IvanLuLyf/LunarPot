@@ -7,7 +7,7 @@ import cn.twimi.util.ApiResponse;
 import cn.twimi.common.dao.UserDao;
 import cn.twimi.common.model.User;
 import cn.twimi.common.service.UserService;
-import cn.twimi.util.MD5;
+import cn.twimi.util.HashUtil;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private String generateToken(String username) {
-        return MD5.encode("BUNNY_" + Math.random() + "$" + username);
+        return HashUtil.encode("BUNNY_" + Math.random() + "$" + username);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return ApiResponse.<User>builder().status(1002).msg("用户不存在").build();
         }
-        if (!user.getPassword().equals(MD5.encode(password))) {
+        if (!user.getPassword().equals(HashUtil.encode(password))) {
             return ApiResponse.<User>builder().status(1001).msg("密码错误").build();
         }
         if (user.getState() != 1) {
@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService {
         if (u != null) {
             return ApiResponse.<User>builder().status(1003).msg("邮箱已存在").build();
         }
-        user.setPassword(MD5.encode(user.getPassword()));
+        user.setPassword(HashUtil.encode(user.getPassword()));
         user.setExpire(new Date(System.currentTimeMillis() + 86400000L));
         user.setToken(generateToken(user.getUsername()));
         int row = userDao.create(user);

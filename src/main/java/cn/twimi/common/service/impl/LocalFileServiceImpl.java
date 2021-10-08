@@ -2,7 +2,7 @@ package cn.twimi.common.service.impl;
 
 import cn.twimi.common.model.FileInfo;
 import cn.twimi.common.service.FileService;
-import cn.twimi.util.MD5;
+import cn.twimi.util.HashUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,7 @@ public class LocalFileServiceImpl implements FileService {
         String path = "";
         try {
             String[] fs = Objects.requireNonNull(file.getOriginalFilename()).split("\\.");
-            String filename = MD5.encode("res" + System.currentTimeMillis()) + "." + fs[fs.length - 1];
+            String filename = HashUtil.encode("res" + System.currentTimeMillis()) + "." + fs[fs.length - 1];
             File dir = getDir(subDir);
             File uploadFile = new File(dir.getAbsolutePath() + File.separator + filename);
             file.transferTo(uploadFile);
