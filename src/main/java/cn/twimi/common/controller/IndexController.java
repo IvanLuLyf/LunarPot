@@ -14,7 +14,7 @@ public class IndexController {
     public Map<String, Object> index() {
         return new HashMap<String, Object>() {{
             put("name", "LunarPot");
-            put("version", "20211007");
+            put("version", "20220104");
         }};
     }
 }
