@@ -1,6 +1,6 @@
 package cn.twimi.live.service.impl;
 
-import cn.twimi.util.ApiResponse;
+import cn.twimi.response.ApiResponse;
 import cn.twimi.live.dao.LiveDao;
 import cn.twimi.live.dao.MessageDao;
 import cn.twimi.common.model.FileInfo;

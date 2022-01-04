@@ -1,7 +1,7 @@
 package cn.twimi.common.service;
 
 import org.springframework.stereotype.Service;
-import cn.twimi.util.ApiResponse;
+import cn.twimi.response.ApiResponse;
 import cn.twimi.common.model.User;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,6 +1,6 @@
 package cn.twimi.blog.service.impl;
 
-import cn.twimi.util.ApiResponse;
+import cn.twimi.response.ApiResponse;
 import cn.twimi.blog.dao.ArticleDao;
 import cn.twimi.blog.model.Article;
 import cn.twimi.blog.service.ArticleService;

@@ -1,8 +1,8 @@
 package cn.twimi.blog.controller;
 
 import cn.twimi.common.annotation.Permission;
-import cn.twimi.util.ApiResponse;
-import cn.twimi.util.PageData;
+import cn.twimi.response.ApiResponse;
+import cn.twimi.response.PageData;
 import cn.twimi.blog.model.Article;
 import cn.twimi.common.model.User;
 import cn.twimi.blog.service.ArticleService;

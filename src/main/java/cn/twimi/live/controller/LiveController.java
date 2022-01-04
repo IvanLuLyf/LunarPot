@@ -1,8 +1,8 @@
 package cn.twimi.live.controller;
 
 import cn.twimi.common.annotation.Permission;
-import cn.twimi.util.ApiResponse;
-import cn.twimi.util.PageData;
+import cn.twimi.response.ApiResponse;
+import cn.twimi.response.PageData;
 import cn.twimi.live.model.Live;
 import cn.twimi.live.model.Message;
 import cn.twimi.common.model.User;

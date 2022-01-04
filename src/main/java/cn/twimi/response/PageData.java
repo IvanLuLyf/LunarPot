@@ -1,4 +1,4 @@
-package cn.twimi.util;
+package cn.twimi.response;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
