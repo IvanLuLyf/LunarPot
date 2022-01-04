@@ -1,6 +1,8 @@
 {
   "name": "LunarPot",
   "description": "Backend for Small Apps.",
+  "repository": "https://github.com/IvanLuLyf/LunarPot",
+  "image": "heroku/java",
   "addons": [
     "heroku-postgresql"
   ]
