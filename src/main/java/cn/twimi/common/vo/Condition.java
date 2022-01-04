@@ -1,4 +1,4 @@
-package cn.twimi.common.model;
+package cn.twimi.common.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
